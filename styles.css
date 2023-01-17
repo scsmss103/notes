@@ -86,6 +86,9 @@ h1 {
     -moz-box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.76);
     overflow:auto;
     padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .noteCard:hover {
@@ -95,11 +98,16 @@ h1 {
     margin-top: -5px;
 }
 
+.noteCard:hover .actionContainer,
+.noteCard:hover .pinContainer{
+    visibility: visible;
+}
+
 .pinContainer{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    
+    visibility: hidden;
 }
 
 .tooltip{
@@ -127,6 +135,31 @@ h1 {
 
 .material-symbols-outlined.pinned:hover ~ .tooltip{
     visibility: visible;
+}
+
+.noteText{
+    resize:none;
+    width:100%;
+    background-color: rgba(0,0,0,0);
+    flex:1;
+    border:0;
+}
+
+.noteText:focus{
+    border:0;
+    outline:none;
+}
+
+.actionContainer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap:4px;
+    visibility: hidden;
+}
+
+.cardBtn{
+    padding:4px;
 }
 
 .divider-horizontal {
@@ -158,5 +191,9 @@ h1 {
     .noteCard {
         height: 20vw;
         width: 20vw;
+    }
+
+    .noteText{
+        min-height:1px;
     }
 }
