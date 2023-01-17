@@ -1,6 +1,6 @@
 :root {
     --prime-color: rgb(255, 255, 136);
-    --font-color: rgb(26,26,26);
+    --font-color: rgb(26, 26, 26);
 }
 
 *,
@@ -31,45 +31,132 @@ h1 {
 
 }
 
-.navBtn{
-    color:var(--font-color);
-    background-color: rgba(0,0,0,0);
+.navBtn {
+    color: var(--font-color);
+    background-color: rgba(0, 0, 0, 0);
     font-size: 1rem;
-    font-weight:bold;
-    border:0;
+    font-weight: bold;
+    border: 0;
 }
 
-.navBtn:hover{
-    cursor:pointer;
+.navBtn:hover {
+    cursor: pointer;
     background-color: rgb(218, 218, 77);
-    color:var(--font-color);
-    border:0;
+    color: var(--font-color);
+    border: 0;
 }
 
-.main{
-    display:flex;
+.main {
+    display: flex;
     justify-content: space-between;
 }
 
-.labels{
-    border:1px solid black;
-    width:10vw;
-    height:100%;
+.labels {
+    border: 1px solid black;
+    width: 10vw;
+    height: 100%;
+    overflow: auto;
 }
 
-.notes{
+.notes {
     width: 85vw;
-    height:100%;
+    height: 100%;
+    overflow: auto;
 }
 
-.pinnedNotes{
-    margin-top:5vh;
+.pinnedNotes {
+    margin-top: 5vh;
 }
 
-.divider-horizontal{
-    height:1px;
+.noteCards {
+    display: grid;
+    gap: 8px;
+    row-gap: 12px;
+    padding: 4px;
+    margin-top:2vh;
+}
+
+.noteCard {
+    position: block;
+    background-color: var(--prime-color);
+    color: var(--font-color);
+    border-radius: 10px;
+    box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.76);
+    -webkit-box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.76);
+    -moz-box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.76);
+    overflow:auto;
+    padding: 8px;
+}
+
+.noteCard:hover {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: -5px;
+}
+
+.pinContainer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+.tooltip{
+    position:fixed;
+    visibility: hidden;
+    background-color: grey;
+    color:white;
+    font-size: 14px;
+    width:auto;
+    text-align: center;
+    padding:2px;
+}
+
+.material-symbols-outlined{
+    font-variation-settings: 'FILL' 0;
+    color: var(--font-color);
+    cursor:pointer;
+}
+
+.material-symbols-outlined.pinned{
+    font-variation-settings: 'FILL' 1;
+    transform: rotate(45deg);
+    color: var(--font-color);
+}
+
+.material-symbols-outlined.pinned:hover ~ .tooltip{
+    visibility: visible;
+}
+
+.divider-horizontal {
+    height: 1px;
     width: 100%;
     background-color: lightgrey;
-    margin:5vh 0;
+    margin: 5vh 0;
 }
 
+/* Media queries */
+@media screen and (max-width:768px) {
+
+    .noteCards {
+        grid-template-columns: 1fr;
+    }
+
+    .noteCard {
+        height: 60vw;
+        width: 60vw;
+    }
+}
+
+@media screen and (min-width:769px) {
+
+    .noteCards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .noteCard {
+        height: 20vw;
+        width: 20vw;
+    }
+}

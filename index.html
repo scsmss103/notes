@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script type="module" src="./index.js"></script>
-
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./styles.css">
     <title>Notes</title>
 </header>
 
@@ -24,16 +25,40 @@
             <h2>Labels</h2>
         </section>
         <section class="notes">
+            <article class="newNote">
+
+            </article>
             <article class="pinnedNotes">
                 <h2>Pinned Notes</h2>
-                <div class="pinnedNotesCards"></div>
+                <div class="noteCards">
+                    <div class="noteCard">
+                        <div class="pinContainer">
+                            <div style="display:block;position:relative;">
+                                <i class="material-symbols-outlined pinned">push_pin</i>
+                                <div class="tooltip">Unpin</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="noteCard"></div>
+                    <div class="noteCard"></div>
+                    <div class="noteCard"></div>
+                    <div class="noteCard"></div>
+                    <div class="noteCard"></div>
+                </div>
             </article>
             <div class="divider-horizontal"></div>
             <article class="allNotes">
                 <h2>All Notes</h2>
+                <div class="noteCards">
+                    <div class="noteCard"></div>
+                    <div class="noteCard"></div>
+                    <div class="noteCard"></div>
+                    <div class="noteCard"></div>
+                    <div class="noteCard"></div>
+                    <div class="noteCard"></div>
+                </div>
             </article>
         </section>
-
     </main>
 </body>
 
