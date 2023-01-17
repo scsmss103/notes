@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script type="module" src="./index.js"></script>
+
+    <link rel="stylesheet" href="/styles.css">
+    <title>Notes</title>
+</header>
+
+<body onload="initPage()">
+    <nav class="nav">
+        <h1 class="navTitle">
+            Notes App
+        </h1>
+        <div class="navBtns">
+            <button class="navBtn" onclick="navBtn()">Take Note</button>
+            <button class="navBtn" onclick="navBtn()">Check all notes</button>
+        </div>
+    </nav>
+    <main class="main">
+        <section class="labels">
+            <h2>Labels</h2>
+        </section>
+        <section class="notes">
+            <article class="pinnedNotes">
+                <h2>Pinned Notes</h2>
+                <div class="pinnedNotesCards"></div>
+            </article>
+            <div class="divider-horizontal"></div>
+            <article class="allNotes">
+                <h2>All Notes</h2>
+            </article>
+        </section>
+
+    </main>
+</body>
+
+</html>
