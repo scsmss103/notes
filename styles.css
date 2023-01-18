@@ -105,7 +105,7 @@ h1 {
 
 .pinContainer{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     visibility: hidden;
 }
@@ -119,12 +119,18 @@ h1 {
     width:auto;
     text-align: center;
     padding:2px;
+    border:1px solid grey;
+    border-radius: 5px;
 }
 
 .material-symbols-outlined{
     font-variation-settings: 'FILL' 0;
     color: var(--font-color);
     cursor:pointer;
+}
+
+.material-symbols-outlined:hover ~ .tooltip{
+    visibility: visible;
 }
 
 .material-symbols-outlined.pinned{
@@ -152,14 +158,57 @@ h1 {
 
 .actionContainer{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    gap:4px;
     visibility: hidden;
 }
 
+.colorPicker{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    position:fixed;
+    visibility: hidden;
+    background-color: white;
+    gap:2px;
+    border: 1px solid black;
+    padding:2px;
+}
+
+.color{
+    height:25px;
+    width:25px;
+    border: 1px solid black;
+}
+
+.red{
+    background-color: red;
+}
+
+.blue{
+    background-color: blue;
+}
+
+.yellow{
+    background-color: var(--prime-color);
+}
+
+.black{
+    background-color: black;
+}
+
+.white{
+    background-color: white;
+}
+
+
+
 .cardBtn{
     padding:4px;
+    border-radius: 5px;
+    border:1px solid lightgrey;
+    background-color: lightgrey;
+    font-weight: bold;
+    cursor:pointer;
 }
 
 .divider-horizontal {

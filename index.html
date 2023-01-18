@@ -37,11 +37,47 @@
                                 <i class="material-symbols-outlined pinned">push_pin</i>
                                 <div class="tooltip">Unpin</div>
                             </div>
+                            <div style="display:block;position:relative;">
+                                <i class="material-symbols-outlined">fullscreen</i>
+                                <div class="tooltip">Maximize</div>
+                            </div>
                         </div>
-                        <textarea class="noteText" onfocus="noteCardFocus(event)" onfocusout="noteCardFocusOut(event)"></textarea>
+                        <textarea class="noteText" onfocus="noteCardFocus(event)"
+                            onfocusout="noteCardFocusOut(event)"></textarea>
                         <div class="actionContainer">
-                            <button class="cardBtn">Cancel</button>
-                            <button class="cardBtn">OK</button>
+                            <div style="display:flex;flex-direction:row;gap:6px;">
+                                <div style="display:block;position:relative;">
+                                    <i class="material-symbols-outlined">label</i>
+                                    <div class="tooltip">Labels</div>
+                                </div>
+                                <div style="display:block;position:relative;">
+                                    <i class="material-symbols-outlined">delete</i>
+                                    <div class="tooltip">Delete</div>
+                                </div>
+                                <div style="display:block;position:relative;">
+                                    <i class="material-symbols-outlined">palette</i>
+                                    <div class="colorPicker">
+                                        
+                                    </div>
+                                    <div class="tooltip">Change Note color</div>
+                                </div>
+                                <div style="display:block;position:relative;">
+                                    <i class="material-symbols-outlined clrPicker" >format_color_text</i>
+                                    <div class="colorPicker">
+                                        <div class="color red"></div>
+                                        <div class="color blue"></div>
+                                        <div class="color yellow"></div>
+                                        <div class="color black"></div>
+                                        <div class="color white"></div>
+                                        <div class="color picker"></div>
+                                    </div>
+                                    <div class="tooltip">Change font color</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;flex-direction: row;gap:6px;">
+                                <button class="cardBtn">Cancel</button>
+                                <button class="cardBtn">OK</button>
+                            </div>
                         </div>
                     </div>
                     <div class="noteCard"></div>
