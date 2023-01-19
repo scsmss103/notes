@@ -33,6 +33,13 @@ window.noteCardFocusOut = function noteCardFocusOut(e) {
 }
 
 function toggleColorPicker(e) {
+    //close all other picker first
+    const nearestNoteCar = e.currentTarget.closest('.noteCard')
+    const allColorPicker = nearestNoteCar.querySelectorAll('.colorPicker')
+    allColorPicker.forEach((x)=>{
+        x.style.visibility = null
+    })
+    //open color picker
     const parent = e.currentTarget.parentElement
     const picker = parent.querySelector('.colorPicker')
     if (window.getComputedStyle(picker).getPropertyValue('visibility') === 'hidden') {
@@ -42,8 +49,22 @@ function toggleColorPicker(e) {
     }
 }
 
+function mouseOverColorPicker(e) {
+    e.currentTarget.addEventListener('mouseleave', (e) => { mouseLeaveColorPicker(e) })
+}
+
+function mouseLeaveColorPicker(e) {
+    e.currentTarget.removeEventListener('mouseleave', (e) => { mouseLeaveColorPicker(e) })
+    e.currentTarget.style.visibility = null
+}
+
 //eventListener
-const pickers = document.querySelectorAll('.clrPicker')
-pickers.forEach((x)=>{
-    x.addEventListener('click',(e)=>{toggleColorPicker(e)})
+const pickersIcon = document.querySelectorAll('.clrPicker')
+pickersIcon.forEach((x) => {
+    x.addEventListener('click', (e) => { toggleColorPicker(e) })
+})
+
+const colorPicker = document.querySelectorAll('.colorPicker')
+colorPicker.forEach((x) => {
+    x.addEventListener('mouseover', (e) => { mouseOverColorPicker(e) })
 })

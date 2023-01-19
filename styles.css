@@ -78,7 +78,6 @@ h1 {
 
 .noteCard {
     position: block;
-    background-color: var(--prime-color);
     color: var(--font-color);
     border-radius: 10px;
     box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.76);
