@@ -30,7 +30,9 @@
             </article>
             <article class="pinnedNotes">
                 <h2>Pinned Notes</h2>
+                <!--
                 <div class="noteCards">
+                    
                     <div class="noteCard yellow">
                         <div class="pinContainer">
                             <div style="display:block;position:relative;">
@@ -38,7 +40,7 @@
                                 <div class="tooltip">Unpin</div>
                             </div>
                             <div style="display:block;position:relative;">
-                                <i class="material-symbols-outlined">fullscreen</i>
+                                <i class="material-symbols-outlined maximize">fullscreen</i>
                                 <div class="tooltip">Maximize</div>
                             </div>
                         </div>
@@ -57,24 +59,24 @@
                                 <div style="display:block;position:relative;">
                                     <i class="material-symbols-outlined clrPicker">palette</i>
                                     <div class="colorPicker">
-                                        <div class="color red"></div>
-                                        <div class="color blue"></div>
-                                        <div class="color yellow"></div>
-                                        <div class="color black"></div>
-                                        <div class="color white"></div>
-                                        <div class="color picker"></div> 
+                                        <div class="bg-color red"></div>
+                                        <div class="bg-color blue"></div>
+                                        <div class="bg-color yellow"></div>
+                                        <div class="bg-color black"></div>
+                                        <div class="bg-color white"></div>
+                                        <div class="bg-color picker"></div> 
                                     </div>
                                     <div class="tooltip">Change Note color</div>
                                 </div>
                                 <div style="display:block;position:relative;">
                                     <i class="material-symbols-outlined clrPicker" >format_color_text</i>
                                     <div class="colorPicker">
-                                        <div class="color red"></div>
-                                        <div class="color blue"></div>
-                                        <div class="color yellow"></div>
-                                        <div class="color black"></div>
-                                        <div class="color white"></div>
-                                        <div class="color picker"></div>
+                                        <div class="txt-color red"></div>
+                                        <div class="txt-color blue"></div>
+                                        <div class="txt-color yellow"></div>
+                                        <div class="txt-color black"></div>
+                                        <div class="txt-color white"></div>
+                                        <div class="txt-color picker"></div>
                                     </div>
                                     <div class="tooltip">Change font color</div>
                                 </div>
@@ -91,21 +93,79 @@
                     <div class="noteCard yellow"></div>
                     <div class="noteCard yellow"></div>
                 </div>
+                -->
             </article>
             <div class="divider-horizontal"></div>
             <article class="allNotes">
                 <h2>All Notes</h2>
                 <div class="noteCards">
+                    <!--
                     <div class="noteCard yellow"></div>
                     <div class="noteCard yellow"></div>
                     <div class="noteCard yellow"></div>
                     <div class="noteCard yellow"></div>
                     <div class="noteCard yellow"></div>
                     <div class="noteCard yellow"></div>
+                    -->
                 </div>
             </article>
         </section>
     </main>
+
+    <div id="tmpl_card" class="noteCard yellow" style="display:none">
+        <div class="pinContainer">
+            <div style="display:block;position:relative;">
+                <i class="material-symbols-outlined">push_pin</i>
+                <div class="tooltip">Unpin</div>
+            </div>
+            <div style="display:block;position:relative;">
+                <i class="material-symbols-outlined maximize">fullscreen</i>
+                <div class="tooltip">Maximize</div>
+            </div>
+        </div>
+        <textarea class="noteText" onfocus="noteCardFocus(event)"
+            onfocusout="noteCardFocusOut(event)"></textarea>
+        <div class="actionContainer">
+            <div style="display:flex;flex-direction:row;gap:6px;">
+                <div style="display:block;position:relative;">
+                    <i class="material-symbols-outlined">label</i>
+                    <div class="tooltip">Labels</div>
+                </div>
+                <div style="display:block;position:relative;">
+                    <i class="material-symbols-outlined">delete</i>
+                    <div class="tooltip">Delete</div>
+                </div>
+                <div style="display:block;position:relative;">
+                    <i class="material-symbols-outlined clrPicker">palette</i>
+                    <div class="colorPicker">
+                        <div class="bg-color red"></div>
+                        <div class="bg-color blue"></div>
+                        <div class="bg-color yellow"></div>
+                        <div class="bg-color black"></div>
+                        <div class="bg-color white"></div>
+                        <div class="bg-color picker"></div> 
+                    </div>
+                    <div class="tooltip">Change Note color</div>
+                </div>
+                <div style="display:block;position:relative;">
+                    <i class="material-symbols-outlined clrPicker" >format_color_text</i>
+                    <div class="colorPicker">
+                        <div class="txt-color red"></div>
+                        <div class="txt-color blue"></div>
+                        <div class="txt-color yellow"></div>
+                        <div class="txt-color black"></div>
+                        <div class="txt-color white"></div>
+                        <div class="txt-color picker"></div>
+                    </div>
+                    <div class="tooltip">Change font color</div>
+                </div>
+            </div>
+            <div style="display:flex;flex-direction: row;gap:6px;">
+                <button class="cardBtn">Cancel</button>
+                <button class="cardBtn">OK</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
