@@ -5,27 +5,49 @@ const localData = JSON.parse(localStorage.getItem('notes'))
 
 window.initPage = function initPage() {
     setHeight('main')
-    console.log(localData)
+    //console.log(localData)
+    createNoteCards(localData)
 }
-
-
 
 function createNoteCards(data) {
     const tmplCard = document.querySelector('#tmpl_card')
-    const cards = document.createDocumentFragment()
-    const cardsCont = document.createElement('div')
-    cardsCont.classList.add('noteCards')
+    const cardsPinned = document.createDocumentFragment()
+    const cardsUnpinned = document.createDocumentFragment()
+    const cardsContPinned = document.createElement('div')
+    cardsContPinned.classList.add('noteCards')
+    const cardsContUnpinned = document.createElement('div')
+    cardsContUnpinned.classList.add('noteCards')
 
-    data.forEach((x)=>{
+    data.forEach((x) => {
         var tmpcard = tmplCard.cloneNode(true)
+        tmpcard.removeAttribute('id')
+        tmpcard.style.display = null
+        const txt = tmpcard.querySelector('.noteText')
+        txt.innerText = x.note
+        if (x.pinned) {
+            const pin = tmpcard.querySelector('.pinIcon')
+            pin.classList.add('pinned')
+            if (cardsPinned.childElementCount !== 0) {
+                cardsPinned.insertBefore(tmpcard, cardsPinned.children[0])
+            } else {
+                cardsPinned.appendChild(tmpcard)
+            }
+        } else {
+            if (cardsUnpinned.childElementCount !== 0) {
+                cardsUnpinned.insertBefore(tmpcard, cardsUnpinned.children[0])
+            } else {
+                cardsUnpinned.appendChild(tmpcard)
+            }
+        }
     })
-    
+    cardsContPinned.appendChild(cardsPinned)
+    cardsContUnpinned.appendChild(cardsUnpinned)
+    const pinnedNotes = document.querySelector('.pinnedNotes')
+    const allNotes = document.querySelector('.allNotes')
+    pinnedNotes.appendChild(cardsContPinned)
+    allNotes.appendChild(cardsContUnpinned)
 
-}
-
-
-function navBtn() {
-    alert('this is nav btn')
+    createNoteEventListeners()
 }
 
 window.noteCardFocus = function noteCardFocus(e) {
@@ -109,22 +131,24 @@ function bgColorClick(e) {
 }
 
 //eventListener
-const pickersIcon = document.querySelectorAll('.clrPicker')
-pickersIcon.forEach((x) => {
-    x.addEventListener('click', (e) => { toggleColorPicker(e) })
-})
+function createNoteEventListeners(){
+    const pickersIcon = document.querySelectorAll('.clrPicker')
+    pickersIcon.forEach((x) => {
+        x.addEventListener('click', (e) => { toggleColorPicker(e) })
+    })
 
-const colorPicker = document.querySelectorAll('.colorPicker')
-colorPicker.forEach((x) => {
-    x.addEventListener('mouseover', (e) => { mouseOverColorPicker(e) })
-})
+    const colorPicker = document.querySelectorAll('.colorPicker')
+    colorPicker.forEach((x) => {
+        x.addEventListener('mouseover', (e) => { mouseOverColorPicker(e) })
+    })
 
-const maximize = document.querySelectorAll('.maximize')
-maximize.forEach((x) => {
-    x.addEventListener('click', (e) => { maximizeCard(e) })
-})
+    const maximize = document.querySelectorAll('.maximize')
+    maximize.forEach((x) => {
+        x.addEventListener('click', (e) => { maximizeCard(e) })
+    })
 
-const color = document.querySelectorAll('.bg-color')
-color.forEach((x) => {
-    x.addEventListener('click', (e) => { bgColorClick(e) })
-})
+    const color = document.querySelectorAll('.bg-color')
+    color.forEach((x) => {
+        x.addEventListener('click', (e) => { bgColorClick(e) })
+    })
+}
