@@ -69,19 +69,17 @@ window.noteCardFocusOut = function noteCardFocusOut(e) {
 }
 
 function toggleColorPicker(e) {
-    //close all other picker first
     const nearestNoteCar = e.currentTarget.closest('.noteCard')
     const allColorPicker = nearestNoteCar.querySelectorAll('.colorPicker')
-    allColorPicker.forEach((x) => {
-        x.style.visibility = null
-    })
-    //open color picker
     const parent = e.currentTarget.parentElement
     const picker = parent.querySelector('.colorPicker')
-    if (window.getComputedStyle(picker).getPropertyValue('visibility') === 'hidden') {
-        picker.style.visibility = 'visible'
+    if (window.getComputedStyle(picker).getPropertyValue('display') === 'none') {
+        allColorPicker.forEach((x) => {
+            x.style.display = 'none'
+        })
+        picker.style.display = 'grid'
     } else {
-        picker.style.visibility = null
+        picker.style.display = 'none'
     }
 }
 
@@ -91,7 +89,7 @@ function mouseOverColorPicker(e) {
 
 function mouseLeaveColorPicker(e) {
     e.currentTarget.removeEventListener('mouseleave', (e) => { mouseLeaveColorPicker(e) })
-    e.currentTarget.style.visibility = null
+    e.currentTarget.style.display = ''
 }
 
 function maximizeCard(e) {
@@ -131,7 +129,7 @@ function bgColorClick(e) {
 }
 
 //eventListener
-function createNoteEventListeners(){
+function createNoteEventListeners() {
     const pickersIcon = document.querySelectorAll('.clrPicker')
     pickersIcon.forEach((x) => {
         x.addEventListener('click', (e) => { toggleColorPicker(e) })
@@ -151,4 +149,12 @@ function createNoteEventListeners(){
     color.forEach((x) => {
         x.addEventListener('click', (e) => { bgColorClick(e) })
     })
+
+    const newNoteTxt = document.querySelector('.newNoteText')
+    newNoteTxt.addEventListener('input',(e)=>{
+        const elem = e.currentTarget
+        elem.style.height = elem.scrollHeight + 3 + 'px'
+    })
+    
+    
 }

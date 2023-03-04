@@ -58,6 +58,37 @@ h1 {
     overflow: auto;
 }
 
+.newNoteCont {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:8px;
+}
+
+.newNote {
+    border-radius: 5px;
+    border: 1px solid black;
+    width:50%;
+    padding: 4px;
+}
+
+.newNoteText{
+    width:100%;
+    border:0;
+    resize: none;
+    margin:0;
+}
+
+.newNoteText:focus{
+    outline: none;
+}
+
+.newNoteActionCont{
+    display: flex;
+    justify-content: space-between;
+}
+
 .notes {
     width: 85vw;
     height: 100%;
@@ -73,31 +104,30 @@ h1 {
     gap: 8px;
     row-gap: 12px;
     padding: 4px;
-    margin-top:2vh;
+    margin-top: 2vh;
 }
 
 .noteCard {
-    position: block;
     color: var(--font-color);
     border-radius: 10px;
     box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.76);
     -webkit-box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.76);
     -moz-box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.76);
-    overflow:auto;
+    /*overflow: auto;*/
     padding: 8px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition-property: width,height;
+    transition-property: width, height;
     transition-duration: 0.5s;
 }
 
-.noteCard.maximized{
+.noteCard.maximized {
     position: fixed;
-    height:96vh;
+    height: 96vh;
     width: 96vw;
-    top:2vh;
-    left:2vw;
+    top: 2vh;
+    left: 2vw;
 }
 
 .noteCard:not(.maximized):hover {
@@ -108,121 +138,123 @@ h1 {
 }
 
 .noteCard:hover .actionContainer,
-.noteCard:hover .pinContainer{
+.noteCard:hover .pinContainer {
     visibility: visible;
 }
 
-.pinContainer{
+.pinContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     visibility: hidden;
 }
 
-.tooltip{
-    position:fixed;
+.tooltip {
+    position: fixed;
     visibility: hidden;
     background-color: grey;
-    color:white;
+    color: white;
     font-size: 14px;
-    width:auto;
+    width: auto;
     text-align: center;
-    padding:2px;
-    border:1px solid grey;
+    padding: 2px;
+    border: 1px solid grey;
     border-radius: 5px;
 }
 
-.material-symbols-outlined{
+.material-symbols-outlined {
     font-variation-settings: 'FILL' 0;
     color: var(--font-color);
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.material-symbols-outlined:hover ~ .tooltip{
+.material-symbols-outlined:hover~.tooltip {
     visibility: visible;
 }
 
-.material-symbols-outlined.pinned{
+.material-symbols-outlined.pinned {
     font-variation-settings: 'FILL' 1;
     transform: rotate(45deg);
     color: var(--font-color);
 }
 
-.material-symbols-outlined.pinned:hover ~ .tooltip{
+.material-symbols-outlined.pinned:hover~.tooltip {
     visibility: visible;
 }
 
-.noteText{
-    resize:none;
-    width:100%;
-    background-color: rgba(0,0,0,0);
-    flex:1;
-    border:0;
+.noteText {
+    resize: none;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    flex: 1;
+    border: 0;
 }
 
-.noteText:focus{
-    border:0;
-    outline:none;
+.noteText:focus {
+    border: 0;
+    outline: none;
 }
 
-.actionContainer{
+.actionContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     visibility: hidden;
 }
 
-.colorPicker{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    position:fixed;
-    visibility: hidden;
+.colorPicker {
+    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    position: absolute;
+
     background-color: white;
-    gap:2px;
+    gap: 2px;
     border: 1px solid black;
-    padding:2px;
+    padding: 2px;
+    z-index: 1999;
 }
 
-.colorPicker.maximized{
-    position:absolute;
-    bottom:125%;
+.colorPicker.maximized {
+    position: absolute;
+    bottom: 125%;
 }
 
-.txt-color,.bg-color{
-    height:25px;
-    width:25px;
+.txt-color,
+.bg-color {
+    height: 25px;
+    width: 25px;
     border: 1px solid black;
 }
 
-.red{
+.red {
     background-color: red;
 }
 
-.blue{
+.blue {
     background-color: blue;
 }
 
-.yellow{
+.yellow {
     background-color: var(--prime-color);
 }
 
-.black{
+.black {
     background-color: black;
 }
 
-.white{
+.white {
     background-color: white;
 }
 
 
 
-.cardBtn{
-    padding:4px;
+.cardBtn {
+    padding: 4px;
     border-radius: 5px;
-    border:1px solid lightgrey;
+    border: 1px solid lightgrey;
     background-color: lightgrey;
     font-weight: bold;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .divider-horizontal {
@@ -256,7 +288,7 @@ h1 {
         width: 20vw;
     }
 
-    .noteText{
-        min-height:1px;
+    .noteText {
+        min-height: 1px;
     }
 }
