@@ -27,9 +27,42 @@
         <section class="notes">
             <article class="newNoteCont">
                 <div class="newNote">
-                    <textarea class="newNoteText"></textarea>
+                    <textarea class="newNoteText" placeholder='Take a new note'></textarea>
                     <div class="newNoteActionCont">
-                        
+                        <div class="newNoteActionEdit">
+                            <div style="position:relative">
+                                <i class="material-symbols-outlined">label</i>
+                                <div class="tooltip">Label</div>
+                            </div>
+                            <div style="display:block;position:relative;">
+                                <i class="material-symbols-outlined clrPicker">palette</i>
+                                <div class="colorPicker">
+                                    <div class="bg-color red"></div>
+                                    <div class="bg-color blue"></div>
+                                    <div class="bg-color yellow"></div>
+                                    <div class="bg-color black"></div>
+                                    <div class="bg-color white"></div>
+                                    <div class="bg-color picker"></div>
+                                </div>
+                                <div class="tooltip">Note color</div>
+                            </div>
+                            <div style="display:block;position:relative;">
+                                <i class="material-symbols-outlined clrPicker">format_color_text</i>
+                                <div class="colorPicker">
+                                    <div class="txt-color red"></div>
+                                    <div class="txt-color blue"></div>
+                                    <div class="txt-color yellow"></div>
+                                    <div class="txt-color black"></div>
+                                    <div class="txt-color white"></div>
+                                    <div class="txt-color picker"></div>
+                                </div>
+                                <div class="tooltip">Font color</div>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="cardBtn">Reset</button>
+                            <button class="cardBtn">Save</button>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -59,7 +92,7 @@
             <div style="display:flex;flex-direction:row;gap:6px;">
                 <div style="display:block;position:relative;">
                     <i class="material-symbols-outlined">label</i>
-                    <div class="tooltip">Labels</div>
+                    <div class="tooltip">Label</div>
                 </div>
                 <div style="display:block;position:relative;">
                     <i class="material-symbols-outlined">delete</i>
@@ -75,7 +108,7 @@
                         <div class="bg-color white"></div>
                         <div class="bg-color picker"></div>
                     </div>
-                    <div class="tooltip">Change Note color</div>
+                    <div class="tooltip">Note color</div>
                 </div>
                 <div style="display:block;position:relative;">
                     <i class="material-symbols-outlined clrPicker">format_color_text</i>
@@ -87,7 +120,7 @@
                         <div class="txt-color white"></div>
                         <div class="txt-color picker"></div>
                     </div>
-                    <div class="tooltip">Change font color</div>
+                    <div class="tooltip">Font color</div>
                 </div>
             </div>
             <div style="display:flex;flex-direction: row;gap:4px;margin-left:4px;">

@@ -153,8 +153,8 @@ function createNoteEventListeners() {
     const newNoteTxt = document.querySelector('.newNoteText')
     newNoteTxt.addEventListener('input',(e)=>{
         const elem = e.currentTarget
-        elem.style.height = elem.scrollHeight + 3 + 'px'
+        elem.style.height = 'auto' //reset height first otherwise no shrink
+        elem.style.height = elem.scrollHeight + 'px'
     })
-    
     
 }
