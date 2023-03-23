@@ -1,12 +1,99 @@
 import { setHeight } from './utils.js'
 
 
-const localData = JSON.parse(localStorage.getItem('notes'))
+class useLocalStorage {
+    constructor(key) {
+        this.key = key
+        let dta = localStorage.getItem(key)
+        if (dta) {
+            this.data = JSON.parse(dta)
+        } else {
+            this.data = []
+        }
+    }
+    #copyData() {
+        return JSON.parse(JSON.stringify([...this.data]))
+    }
+    #findIdx(data, field, value) {
+        let idx = false
+        data.some((x, i) => {
+            if (x[field] == value) {
+                idx = i
+                return true
+            } else {
+                return false
+            }
+        })
+        return idx
+    }
+    set(data) {
+        localStorage.setItem(this.key, JSON.stringify(data))
+        alert('saved to localStorage')
+    }
+    get() {
+        this.data = JSON.parse(localStorage.getItem(this.key))
+        return this.data
+    }
+    add(data) {
+        this.data.push(data)
+        this.set(this.data)
+    }
+    delete(id) {
+        let tmpDta = this.#copyData()
+        let idx = this.#findIdx(tmpDta, 'id', id)
+        if (idx !== false) {
+            tmpDta.splice(idx, 1)
+            this.data = tmpDta
+            this.set(this.data)
+        }
+    }
+    updateNote(data) {
+        let tmpDta = this.#copyData()
+        let idx = this.#findIdx(tmpDta, 'id', data.id)
+        if (idx !== false) {
+            tmpDta.splice(idx, 1, data)
+            this.data = tmpDta
+            this.set(this.data)
+        }
+    }
+    updateNoteField(id, field, value) {
+        let tmpDta = this.#copyData()
+        let idx = this.#findIdx(tmpDta, 'id', id)
+        if (idx !== false) {
+            let row = tmpDta[idx]
+            row[field] = value
+            tmpDta.splice(idx, 1, row)
+            this.data = tmpDta
+            this.set(this.data)
+        }
+    }
+}
+
+const noteStorage = new useLocalStorage('notes')
+
+/// testing start ///
+const testBtn = document.getElementById('testBtn')
+testBtn.addEventListener('click', () => {
+    noteStorage.updateNoteField('4', 'note', 'braa testing updated field from btn')
+    console.log('thats data: ', noteStorage.get())
+    refreshNoteCards()
+})
+/// testing end ///
+
+//const localData = JSON.parse(localStorage.getItem('notes'))
 
 window.initPage = function initPage() {
     setHeight('main')
     //console.log(localData)
-    createNoteCards(localData)
+    createNoteCards(noteStorage.data)
+}
+
+function refreshNoteCards() {
+    const cards = document.querySelectorAll('.noteCards:not(#tmpl_card)')
+    cards.forEach((x) => {
+        x.remove()
+    })
+    initPage()
 }
 
 function createNoteCards(data) {
@@ -151,10 +238,10 @@ function createNoteEventListeners() {
     })
 
     const newNoteTxt = document.querySelector('.newNoteText')
-    newNoteTxt.addEventListener('input',(e)=>{
+    newNoteTxt.addEventListener('input', (e) => {
         const elem = e.currentTarget
         elem.style.height = 'auto' //reset height first otherwise no shrink
         elem.style.height = elem.scrollHeight + 'px'
     })
-    
+
 }
