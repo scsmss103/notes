@@ -71,17 +71,6 @@ class useLocalStorage {
 const noteStorage = new useLocalStorage('notes')
 const bgcolors = ['red', 'blue', 'yellow', 'black', 'white']
 
-/// testing start ///
-const testBtn = document.getElementById('testBtn')
-testBtn.addEventListener('click', () => {
-    noteStorage.updateNoteField('4', 'note', 'braa testing updated field from btn')
-    console.log('thats data: ', noteStorage.get())
-    refreshNoteCards()
-})
-/// testing end ///
-
-//const localData = JSON.parse(localStorage.getItem('notes'))
-
 window.initPage = function initPage() {
     setHeight('main')
     //console.log(localData)
@@ -94,6 +83,29 @@ function refreshNoteCards() {
         x.remove()
     })
     initPage()
+}
+
+function searchHandler(e) {
+    const searchStr = e.currentTarget.value
+    const txt = document.querySelectorAll('.noteText')
+    const cards = document.querySelectorAll('.noteCard')
+    let ids = []
+    txt.forEach((x) => {
+        let val = x.value.toLowerCase()
+        if (val.includes(searchStr)) {
+            const card = x.closest('.noteCard')
+            if (card) {
+                ids.push(card.getAttribute('id'))
+            }
+        }
+    })
+    cards.forEach((x) => {
+        if (!ids.includes(x.id)) {
+            x.style.display = 'none'
+        } else {
+            x.style.display = 'flex'
+        }
+    })
 }
 
 function createNoteCards(data) {
@@ -324,6 +336,10 @@ function newNoteSaveHandler() {
 
 //eventListener
 function createNoteEventListeners() {
+
+    const inp = document.querySelector('.inpSearch')
+    inp.addEventListener('input', searchHandler)
+
     const pickersIcon = document.querySelectorAll('.clrPicker')
     pickersIcon.forEach((x) => {
         x.addEventListener('click', toggleColorPicker)

@@ -16,27 +16,16 @@
             Notes App
         </h1>
         <div class="navBtns">
-            <button class="navBtn">Take Note</button>
-            <button class="navBtn">Check all notes</button>
+            <input class="inpSearch" placeholder="search notes"/>
         </div>
     </nav>
     <main class="main">
-        <section class="labels">
-            <h2>Labels</h2>
-        </section>
         <section class="notes">
-            <div>
-                <button id="testBtn">Test Class</button>
-            </div>
             <article class="newNoteCont">
                 <div class="newNote white">
                     <textarea class="newNoteText" placeholder='Take a new note'></textarea>
                     <div class="newNoteActionCont">
                         <div class="newNoteActionEdit">
-                            <div style="position:relative">
-                                <i class="material-symbols-outlined">label</i>
-                                <div class="tooltip">Label</div>
-                            </div>
                             <div style="position:relative">
                                 <i class="material-symbols-outlined pinIcon">push_pin</i>
                                 <div class="tooltip">Pin Note</div>
@@ -100,10 +89,6 @@
         <textarea class="noteText" onfocus="noteCardFocus(event)" onfocusout="noteCardFocusOut(event)"></textarea>
         <div class="actionContainer">
             <div style="display:flex;flex-direction:row;gap:6px;">
-                <div style="display:block;position:relative;">
-                    <i class="material-symbols-outlined">label</i>
-                    <div class="tooltip">Label</div>
-                </div>
                 <div style="display:block;position:relative;">
                     <i class="material-symbols-outlined deleteIcon">delete</i>
                     <div class="tooltip">Delete</div>
