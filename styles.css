@@ -62,8 +62,9 @@ h1 {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-top: 8px;
+    align-items: flex-start;
+    margin-top: 5vh;
+    min-height: 15vh;
 }
 
 .newNote {
@@ -73,7 +74,7 @@ h1 {
     padding: 4px;
 }
 
-.newNote:hover .newNoteActionCont{
+.newNote:hover .newNoteActionCont {
     display: flex;
 }
 
@@ -82,6 +83,7 @@ h1 {
     border: 0;
     resize: none;
     margin: 0;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .newNoteText:focus {
@@ -261,7 +263,7 @@ h1 {
     background-color: white;
 }
 
-.cardBtn {
+.newNoteBtn {
     padding: 4px;
     border-radius: 5px;
     border: 1px solid lightgrey;

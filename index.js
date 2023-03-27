@@ -1,5 +1,4 @@
-import { setHeight } from './utils.js'
-
+import { randowmHex, setHeight } from './utils.js'
 
 class useLocalStorage {
     constructor(key) {
@@ -28,7 +27,7 @@ class useLocalStorage {
     }
     set(data) {
         localStorage.setItem(this.key, JSON.stringify(data))
-        alert('saved to localStorage')
+        //alert('saved to localStorage')
     }
     get() {
         this.data = JSON.parse(localStorage.getItem(this.key))
@@ -70,6 +69,7 @@ class useLocalStorage {
 }
 
 const noteStorage = new useLocalStorage('notes')
+const bgcolors = ['red', 'blue', 'yellow', 'black', 'white']
 
 /// testing start ///
 const testBtn = document.getElementById('testBtn')
@@ -106,13 +106,36 @@ function createNoteCards(data) {
     cardsContUnpinned.classList.add('noteCards')
 
     data.forEach((x) => {
-        var tmpcard = tmplCard.cloneNode(true)
-        tmpcard.removeAttribute('id')
-        tmpcard.style.display = null
+        var tmpcard = tmplCard.content.firstElementChild.cloneNode(true)
+        tmpcard.id = x.id
+        //note
         const txt = tmpcard.querySelector('.noteText')
         txt.innerText = x.note
+        txt.addEventListener('input', (e) => noteStorage.updateNoteField(x.id, 'note', e.currentTarget.value))
+        //pin
+        const pin = tmpcard.querySelector('.pinIcon')
+        pin.addEventListener('click', (e) => {
+            const elem = e.currentTarget
+            if (Array(...elem.classList).includes('pinned')) {
+                elem.classList.remove('pinned')
+                noteStorage.updateNoteField(x.id, 'pinned', false)
+                refreshNoteCards()
+            } else {
+                elem.classList.add('pinned')
+                noteStorage.updateNoteField(x.id, 'pinned', true)
+                refreshNoteCards()
+            }
+        })
+        //bg color
+        if (x.bgColor !== 'yellow') {
+            tmpcard.classList.remove('yellow')
+            tmpcard.classList.add(x.bgColor)
+        }
+        //delete
+        const del = tmpcard.querySelector('.deleteIcon')
+        del.addEventListener('click', () => { noteStorage.delete(x.id); refreshNoteCards() })
+
         if (x.pinned) {
-            const pin = tmpcard.querySelector('.pinIcon')
             pin.classList.add('pinned')
             if (cardsPinned.childElementCount !== 0) {
                 cardsPinned.insertBefore(tmpcard, cardsPinned.children[0])
@@ -156,11 +179,14 @@ window.noteCardFocusOut = function noteCardFocusOut(e) {
 }
 
 function toggleColorPicker(e) {
-    const nearestNoteCar = e.currentTarget.closest('.noteCard')
+    var nearestNoteCar = e.currentTarget.closest('.noteCard')
+    if (!nearestNoteCar) {
+        nearestNoteCar = e.currentTarget.closest('.newNote')
+    }
     const allColorPicker = nearestNoteCar.querySelectorAll('.colorPicker')
     const parent = e.currentTarget.parentElement
     const picker = parent.querySelector('.colorPicker')
-    if (window.getComputedStyle(picker).getPropertyValue('display') === 'none') {
+    if (window.getComputedStyle(picker).getPropertyValue('display') === 'none' || picker.style.display == 'none') {
         allColorPicker.forEach((x) => {
             x.style.display = 'none'
         })
@@ -196,16 +222,19 @@ function maximizeCard(e) {
 }
 
 function bgColorClick(e) {
-    const card = e.currentTarget.closest('.noteCard')
+    var card = e.currentTarget.closest('.noteCard')
+    if (!card) {
+        card = e.currentTarget.closest('.newNote')
+    }
     const classes = Array(...e.currentTarget.classList)
-    const colors = ['red', 'blue', 'yellow', 'black', 'white']
-    const color = colors.find((x) => {
+
+    const color = bgcolors.find((x) => {
         if (classes.includes(x)) {
             return true
         }
         return false
     })
-    const cardColor = colors.find((x) => {
+    const cardColor = bgcolors.find((x) => {
         if (Array(...card.classList).includes(x)) {
             return true
         }
@@ -213,35 +242,123 @@ function bgColorClick(e) {
     })
     card.classList.remove(cardColor)
     card.classList.add(color)
+    if (card.id) {
+        noteStorage.updateNoteField(card.id, 'bgColor', color)
+    }
+}
+
+function resetNewNote() {
+    const newNote = document.querySelector('.newNote')
+    //bg color
+    const color = bgcolors.find((x) => {
+        if (Array(...newNote.classList).includes(x)) {
+            return true
+        } else {
+            return false
+        }
+    })
+    newNote.classList.remove(color)
+    newNote.classList.add('white')
+    //note
+    const txt = newNote.querySelector('.newNoteText')
+    txt.value = ''
+    //pin
+    const pin = newNote.querySelector('.pinIcon')
+    if (Array(...pin.classList).includes('pinned')) {
+        pin.classList.remove('pinned')
+    }
+
+}
+
+function saveNewNote() {
+    const newNote = document.querySelector('.newNote')
+    let tmpData = {}
+    tmpData.id = randowmHex()
+    //note
+    const txt = newNote.querySelector('.newNoteText')
+    tmpData.note = txt.value
+    //bg color
+    const color = bgcolors.find((x) => {
+        if (Array(...newNote.classList).includes(x)) {
+            return true
+        } else {
+            return false
+        }
+    })
+    tmpData.bgColor = color
+    //pin
+    const pin = newNote.querySelector('.pinIcon')
+    if (Array(...pin.classList).includes('pinned')) {
+        tmpData.pinned = true
+    } else {
+        tmpData.pinned = false
+    }
+    noteStorage.add(tmpData)
+    resetNewNote()
+}
+
+//eventListener Functions
+function newNoteTextHandler(e) {
+    const elem = e.currentTarget
+    elem.style.height = 'auto' //reset height first otherwise no shrink
+    elem.style.height = elem.scrollHeight + 'px'
+}
+
+function newNotePinHandler(e) {
+    const elem = e.currentTarget
+    const newNoteActions = document.querySelector('.newNoteActionEdit')
+    const toolTip = newNoteActions.querySelector('.pinIcon~div')
+    if (Array(...elem.classList).includes('pinned')) {
+        elem.classList.remove('pinned')
+        toolTip.innerHTML = 'Pin note'
+    } else {
+        elem.classList.add('pinned')
+        toolTip.innerHTML = 'Unpin note'
+    }
+}
+
+function newNoteSaveHandler() {
+    saveNewNote()
+    refreshNoteCards()
 }
 
 //eventListener
 function createNoteEventListeners() {
     const pickersIcon = document.querySelectorAll('.clrPicker')
     pickersIcon.forEach((x) => {
-        x.addEventListener('click', (e) => { toggleColorPicker(e) })
+        x.addEventListener('click', toggleColorPicker)
     })
 
     const colorPicker = document.querySelectorAll('.colorPicker')
     colorPicker.forEach((x) => {
-        x.addEventListener('mouseover', (e) => { mouseOverColorPicker(e) })
+        x.addEventListener('mouseover', mouseOverColorPicker)
     })
 
     const maximize = document.querySelectorAll('.maximize')
     maximize.forEach((x) => {
-        x.addEventListener('click', (e) => { maximizeCard(e) })
+        x.addEventListener('click', maximizeCard)
     })
 
     const color = document.querySelectorAll('.bg-color')
     color.forEach((x) => {
-        x.addEventListener('click', (e) => { bgColorClick(e) })
+        x.addEventListener('click', bgColorClick)
     })
 
     const newNoteTxt = document.querySelector('.newNoteText')
-    newNoteTxt.addEventListener('input', (e) => {
-        const elem = e.currentTarget
-        elem.style.height = 'auto' //reset height first otherwise no shrink
-        elem.style.height = elem.scrollHeight + 'px'
-    })
+    newNoteTxt.addEventListener('input', newNoteTextHandler)
 
+    //new notes btns
+    const newNoteActions = document.querySelector('.newNoteActionEdit')
+
+    const newNotePin = newNoteActions.querySelector('.pinIcon')
+    newNotePin.addEventListener('click', newNotePinHandler)
+
+    const newNoteBtns = document.querySelector('.newNoteActionCont>div:last-child')
+    Array(...newNoteBtns.children).forEach((x) => {
+        if (x.innerHTML.toLowerCase() === 'save') {
+            x.addEventListener('click', newNoteSaveHandler)
+        } else {
+            x.addEventListener('click', resetNewNote)
+        }
+    })
 }

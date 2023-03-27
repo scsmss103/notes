@@ -29,7 +29,7 @@
                 <button id="testBtn">Test Class</button>
             </div>
             <article class="newNoteCont">
-                <div class="newNote">
+                <div class="newNote white">
                     <textarea class="newNoteText" placeholder='Take a new note'></textarea>
                     <div class="newNoteActionCont">
                         <div class="newNoteActionEdit">
@@ -37,9 +37,13 @@
                                 <i class="material-symbols-outlined">label</i>
                                 <div class="tooltip">Label</div>
                             </div>
+                            <div style="position:relative">
+                                <i class="material-symbols-outlined pinIcon">push_pin</i>
+                                <div class="tooltip">Pin Note</div>
+                            </div>
                             <div style="display:block;position:relative;">
                                 <i class="material-symbols-outlined clrPicker">palette</i>
-                                <div class="colorPicker">
+                                <div class="colorPicker newnotepicker">
                                     <div class="bg-color red"></div>
                                     <div class="bg-color blue"></div>
                                     <div class="bg-color yellow"></div>
@@ -63,8 +67,8 @@
                             </div>
                         </div>
                         <div>
-                            <button class="cardBtn">Reset</button>
-                            <button class="cardBtn">Save</button>
+                            <button class="newNoteBtn">Reset</button>
+                            <button class="newNoteBtn">Save</button>
                         </div>
                     </div>
                 </div>
@@ -79,7 +83,10 @@
         </section>
     </main>
 
-    <div id="tmpl_card" class="noteCard yellow" style="display:none">
+
+</body>
+<template id="tmpl_card">
+    <div class="noteCard yellow">
         <div class="pinContainer">
             <div style="display:block;position:relative;">
                 <i class="material-symbols-outlined pinIcon">push_pin</i>
@@ -98,7 +105,7 @@
                     <div class="tooltip">Label</div>
                 </div>
                 <div style="display:block;position:relative;">
-                    <i class="material-symbols-outlined">delete</i>
+                    <i class="material-symbols-outlined deleteIcon">delete</i>
                     <div class="tooltip">Delete</div>
                 </div>
                 <div style="display:block;position:relative;">
@@ -126,12 +133,8 @@
                     <div class="tooltip">Font color</div>
                 </div>
             </div>
-            <div style="display:flex;flex-direction: row;gap:4px;margin-left:4px;">
-                <button class="cardBtn">Cancel</button>
-                <button class="cardBtn">Save</button>
-            </div>
         </div>
     </div>
-</body>
+</template>
 
 </html>
